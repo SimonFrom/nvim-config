@@ -17,7 +17,7 @@ return {
           visible = true,          -- show hidden items (dimmed) instead of hiding them
           hide_dotfiles = false,   -- show .dotfiles
           hide_gitignored = false, -- show gitignored files
-          hide_hidden = false,     -- show hidden files (Windows attribute)
+          hide_hidden = true,     -- show hidden files (Windows attribute)
         },
       },
     },
