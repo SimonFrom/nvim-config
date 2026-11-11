@@ -5,6 +5,17 @@ vim.cmd("set shiftwidth=2")
 vim.opt.number = true
 vim.opt.relativenumber = true
 vim.g.mapleader = " "
+vim.opt.wrap = false
+vim.opt.swapfile = false
+
+
+-- Vim keymaps
+vim.keymap.set('n', '<leader>w', ':write<CR>', { desc = 'Save file' })
+vim.keymap.set('n', '<leader>å', ':update<CR> :source<CR>', { desc = 'Update config' })
+vim.keymap.set('n', '<leader>ld', 'yyp', { desc = 'Copy line down' })
+vim.keymap.set('n', '<leader>q', ':quit<CR>', { desc = 'Quit' })
+
+
 
 -- Bootstrap lazy.nvim
 local lazypath = vim.fn.stdpath("data") .. "/lazy/lazy.nvim"
@@ -98,7 +109,5 @@ vim.api.nvim_create_autocmd('FileType', {
       vim.bo[args.buf].indentexpr = "v:lua.require'nvim-treesitter'.indentexpr()"
     end
   end,
-})
-
-
+}) 
 
