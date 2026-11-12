@@ -3,10 +3,17 @@ vim.cmd("set tabstop=2")
 vim.cmd("set softtabstop=2")
 vim.cmd("set shiftwidth=2")
 vim.opt.number = true
-vim.opt.relativenumber = true
+vim.opt.relativenumber = false
 vim.g.mapleader = " "
 vim.opt.wrap = false
 vim.opt.swapfile = false
+
+-- yank highlight
+vim.api.nvim_create_autocmd("TextYankPost", {
+  callback = function()
+    vim.highlight.on_yank({ higroup = "IncSearch", timeout = 500 })
+  end,
+})
 
 -- Vim keymaps
 vim.keymap.set("n", "<leader>w", ":write<CR>", { desc = "Save file" })
@@ -14,6 +21,10 @@ vim.keymap.set("n", "<leader>å", ":update<CR> :source<CR>", { desc = "Update co
 vim.keymap.set("n", "<leader>ld", "yyp", { desc = "Copy line down" })
 vim.keymap.set("n", "<leader>q", ":quit<CR>", { desc = "Quit" })
 vim.keymap.set("n", "<leader>nt", ":tabnew<CR>", { desc = "New tab" })
+vim.keymap.set("n", "<C-Down>", "<C-d>zz", { desc = "Scroll down and center" })
+vim.keymap.set("n", "<C-d>", "<C-d>zz", { desc = "Scroll down and center" })
+vim.keymap.set("n", "<C-Up>", "<C-u>zz", { desc = "Scroll up and center" })
+vim.keymap.set("n", "<C-u>", "<C-u>zz", { desc = "Scroll up and center" })
 
 -- Bootstrap lazy.nvim
 local lazypath = vim.fn.stdpath("data") .. "/lazy/lazy.nvim"
