@@ -1,12 +1,18 @@
 vim.cmd("set expandtab")
-vim.cmd("set tabstop=2")
-vim.cmd("set softtabstop=2")
-vim.cmd("set shiftwidth=2")
+vim.cmd("set tabstop=4")
+vim.cmd("set softtabstop=4")
+vim.cmd("set shiftwidth=4")
 vim.opt.number = true
 vim.opt.relativenumber = false
 vim.g.mapleader = " "
 vim.opt.wrap = false
 vim.opt.swapfile = false
+vim.opt.cursorline = true
+vim.opt.termguicolors = true
+vim.opt.scrolloff = 25
+vim.opt.autoread = true
+vim.opt.signcolumn = "yes"
+vim.opt.clipboard:append("unnamedplus")
 
 -- yank highlight
 vim.api.nvim_create_autocmd("TextYankPost", {
@@ -18,13 +24,27 @@ vim.api.nvim_create_autocmd("TextYankPost", {
 -- Vim keymaps
 vim.keymap.set("n", "<leader>w", ":write<CR>", { desc = "Save file" })
 vim.keymap.set("n", "<leader>å", ":update<CR> :source<CR>", { desc = "Update config" })
-vim.keymap.set("n", "<leader>ld", "yyp", { desc = "Copy line down" })
 vim.keymap.set("n", "<leader>q", ":quit<CR>", { desc = "Quit" })
-vim.keymap.set("n", "<leader>nt", ":tabnew<CR>", { desc = "New tab" })
-vim.keymap.set("n", "<C-Down>", "<C-d>zz", { desc = "Scroll down and center" })
-vim.keymap.set("n", "<C-d>", "<C-d>zz", { desc = "Scroll down and center" })
-vim.keymap.set("n", "<C-Up>", "<C-u>zz", { desc = "Scroll up and center" })
+
+-- formatting
+vim.keymap.set("v", "<", "<gv", { desc = "Indent left" })
+vim.keymap.set("v", ">", ">gv", { desc = "Indent right" })
+vim.keymap.set("n", "<leader>ld", "yyp", { desc = "Copy line down" })
+vim.keymap.set("n", "<C-c>", "y", { desc = "Copy" })
+vim.keymap.set("i", "<C-c>", "y", { desc = "Copy" })
+
+-- navigation
+vim.keymap.set("n", "<A-Down>", ":m .+1<CR>==", { desc = "Move line down" })
+vim.keymap.set("n", "<A-Up>", ":m .-2<CR>==", { desc = "Move line up" })
+vim.keymap.set("v", "<A-Up>", ":m '<-2<CR>gv=gv", { desc = "Move selection up" })
+vim.keymap.set("v", "<A-Down>", ":m '>+1<CR>gv=gv", { desc = "Move selection down" })
 vim.keymap.set("n", "<C-u>", "<C-u>zz", { desc = "Scroll up and center" })
+vim.keymap.set("n", "<C-Up>", "<C-u>zz", { desc = "Scroll up and center" })
+vim.keymap.set("n", "<C-d>", "<C-d>zz", { desc = "Scroll down and center" })
+vim.keymap.set("n", "<C-Down>", "<C-d>zz", { desc = "Scroll down and center" })
+
+-- tabs
+vim.keymap.set("n", "<leader>nt", ":tabnew<CR>", { desc = "New tab" })
 
 -- Bootstrap lazy.nvim
 local lazypath = vim.fn.stdpath("data") .. "/lazy/lazy.nvim"
