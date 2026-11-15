@@ -26,7 +26,7 @@ return {
           title = "> Files",
           items = {
             {
-              label = "New file",
+              label = " New file",
               action = function()
                 vim.ui.input({ prompt = "Name: ", completion = "file" }, function(input)
                   if input == nil or input == "" then
@@ -36,9 +36,9 @@ return {
                 end)
               end,
             },
-            { label = " Find files", action = "Telescope find_files" },
-            { label = " dotfiles", action = "Telescope dotfiles" },
-            { label = " Apps", action = "Telescope app" },
+            { label = " Find files", action = "Telescope file_browser" },
+            { label = " Find text", action = "Telescope live_grep" },
+            -- { label = " Apps", action = "Telescope app" },
           },
         },
         {
@@ -50,7 +50,7 @@ return {
         {
           title = "> Exit",
           items = {
-            { label = "Quit NeoVim", action = "qa" },
+            { label = " Quit NeoVim", action = "qa" },
           },
         },
       },
