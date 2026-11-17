@@ -9,7 +9,17 @@ return {
     },
     keys = {
       { "<leader>e", "<cmd>Neotree toggle<cr>", desc = "Toggle file explorer" },
-      { "<leader>o", "<cmd>Neotree focus<cr>", desc = "Focus file explorer" },
+      {
+        "<leader>o",
+        function()
+          if vim.bo.filetype == "neo-tree" then
+            vim.cmd("wincmd p") -- back to the previous (code) window
+          else
+            vim.cmd("Neotree focus")
+          end
+        end,
+        desc = "Toggle focus: code <-> file explorer",
+      },
     },
     opts = {
       filesystem = {
