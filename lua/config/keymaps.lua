@@ -5,13 +5,17 @@ map("n", "<leader>w", ":write<CR>", { desc = "Save file" })
 map("n", "<leader>å", ":update<CR> :source<CR>", { desc = "Update config" })
 map("n", "<leader>q", ":quit<CR>", { desc = "Quit" })
 
+-- commenting (uses Neovim's built-in gc)
+map("n", "<leader>kc", "gcc", { remap = true, desc = "Comment line" })
+map("x", "<leader>kc", "gc", { remap = true, desc = "Comment selection" })
+map("n", "<C-/>", "gcc", { remap = true, desc = "Comment line" })
+map("x", "<C-/>", "gc", { remap = true, desc = "Comment selection" })
+
 -- formatting
 map("v", "<", "<gv", { desc = "Indent left" })
 map("i", "<Tab>", "<C-t>", { desc = "Indent right" })
 map("v", ">", ">gv", { desc = "Indent right" })
 map("n", "<leader>ld", "yyp", { desc = "Copy line down" })
-map("n", "<C-c>", "y", { desc = "Copy" })
-map("i", "<C-c>", "y", { desc = "Copy" })
 map("i", "<C-Del>", '<C-o>"_dw', { desc = "Delete word forward" })
 
 -- navigation

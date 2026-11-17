@@ -5,7 +5,7 @@ return {
     event = "VeryLazy",
     opts = {
       options = {
-        theme = "catppuccin-nvim",
+        theme = "auto", -- automatically pick theme based on colorscheme
         globalstatus = true, -- one statusline across all splits
         disabled_filetypes = { statusline = { "dashboard" } },
       },
