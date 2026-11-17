@@ -5,7 +5,7 @@ return {
   priority = 1000, -- load before other plugins so their highlights use these colors
   opts = {
     transparent = true, -- same as catppuccin's transparent_background
-    theme = "wave", -- "wave" (default), "dragon" (darker) or "lotus" (light)
+    theme = "dragon", -- "wave" (default), "dragon" (darker) or "lotus" (light)
     overrides = function(colors)
       local palette = colors.palette
       return {
@@ -15,7 +15,7 @@ return {
         -- transparent floating windows, like your catppuccin float settings
         NormalFloat = { bg = "none" },
         FloatBorder = { bg = "none" },
-        Comment = { fg = "#57F287", italic = true },
+        Comment = { fg = "#7f807c", italic = true },
         ["@comment"] = { link = "Comment" }, -- treesitter comments use the same style
       }
     end,

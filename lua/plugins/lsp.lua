@@ -63,6 +63,7 @@ return {
 
       vim.keymap.set("n", "<leader>cd", vim.diagnostic.open_float, { desc = "Line diagnostics" })
       vim.keymap.set("n", "<leader>ca", vim.lsp.buf.code_action, { desc = "Code action" })
+      vim.keymap.set("n", "<leader>df", vim.lsp.buf.definition, { desc = "Go to definition" })
     end,
   },
 }
