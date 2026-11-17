@@ -76,30 +76,7 @@ return {
       {
         "<leader>fd",
         function()
-          local action_state = require("telescope.actions.state")
-          local actions = require("telescope.actions")
-
-          -- open the selected directory (or the folder you're currently in) in neo-tree
-          local function open_in_neotree(prompt_bufnr)
-            local entry = action_state.get_selected_entry()
-            local path = entry and entry.path or action_state.get_current_picker(prompt_bufnr).finder.path
-            if vim.fn.isdirectory(path) == 0 then
-              path = vim.fn.fnamemodify(path, ":h") -- a file was selected: use its folder
-            end
-            actions.close(prompt_bufnr)
-            vim.cmd.cd(path) -- optional: makes <C-p> / <C-g> search this folder too
-            require("neo-tree.command").execute({ dir = path, action = "focus" })
-          end
-
-          require("telescope").extensions.file_browser.file_browser({
-            path = "~/.config",
-            files = false, -- folder browser: lists directories only
-            hidden = true, -- show dot-folders
-            attach_mappings = function(_, map)
-              map({ "i", "n" }, "<A-n>", open_in_neotree)
-              return true -- keep the default mappings
-            end,
-          })
+          require("config.pick_dir").pick()
         end,
         desc = "Pick a directory and open it in neo-tree",
       },

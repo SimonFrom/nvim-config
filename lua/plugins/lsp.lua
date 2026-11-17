@@ -2,10 +2,24 @@
 --   Lua        -> lua_ls
 --   Python     -> ruff (linter) + basedpyright (type checking)
 --   TypeScript -> ts_ls (type errors) + eslint (only active if project has an eslint config)
---   C#         -> omnisharp (needs dotnet)
+--   C#/Razor   -> roslyn via roslyn.nvim (needs dotnet; handles .cs, .razor, .cshtml)
 return {
   {
     "mason-org/mason.nvim",
+    opts = {
+      -- extra registry that ships the Roslyn server (incl. Razor/Blazor support)
+      registries = {
+        "github:mason-org/mason-registry",
+        "github:Crashdummyy/mason-registry",
+      },
+    },
+  },
+  {
+    -- C# + Razor/Blazor LSP (Roslyn with Razor co-hosting; replaces omnisharp)
+    -- install the server once with :MasonInstall roslyn
+    "seblyng/roslyn.nvim",
+    ft = { "cs", "razor", "cshtml" },
+    dependencies = { "mason-org/mason.nvim" },
     opts = {},
   },
   {
@@ -17,8 +31,9 @@ return {
       "saghen/blink.cmp",
     },
     opts = {
-      ensure_installed = { "lua_ls", "ruff", "basedpyright", "ts_ls", "eslint", "omnisharp" },
-      automatic_enable = true, -- calls vim.lsp.enable() for installed servers
+      ensure_installed = { "lua_ls", "ruff", "basedpyright", "ts_ls", "eslint" },
+      -- calls vim.lsp.enable() for installed servers; omnisharp would clash with roslyn
+      automatic_enable = { exclude = { "omnisharp" } },
     },
     config = function(_, opts)
       -- Advertise blink.cmp completion capabilities to every server

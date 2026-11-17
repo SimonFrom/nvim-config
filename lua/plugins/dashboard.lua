@@ -37,6 +37,12 @@ return {
               end,
             },
             { label = " Find files", action = "Telescope file_browser" },
+            {
+              label = " Open folder",
+              action = function()
+                require("config.pick_dir").pick({ position = "current" })
+              end,
+            },
             { label = " Find text", action = "Telescope live_grep" },
             -- { label = " Apps", action = "Telescope app" },
           },

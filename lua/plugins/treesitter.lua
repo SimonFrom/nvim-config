@@ -12,6 +12,7 @@ return {
     ts.install({
       "lua", "vim", "vimdoc", "query", "markdown", "markdown_inline",
       "bash", "python", "javascript", "typescript", "json", "html", "css",
+      "c_sharp", "razor",
     })
 
     -- enable highlighting + indent for any filetype that has a parser
