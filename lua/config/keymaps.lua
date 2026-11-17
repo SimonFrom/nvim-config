@@ -28,5 +28,29 @@ map("n", "<C-Up>", "<C-u>zz", { desc = "Scroll up and center" })
 map("n", "<C-d>", "<C-d>zz", { desc = "Scroll down and center" })
 map("n", "<C-Down>", "<C-d>zz", { desc = "Scroll down and center" })
 
+-- search: while matches are highlighted (after / or ?), arrows jump between
+-- matches and Enter stops there and clears the highlight. Otherwise normal.
+local function searching()
+  return vim.v.hlsearch == 1 and vim.bo.buftype ~= "quickfix"
+end
+for _, key in ipairs({ "<Down>", "<Right>" }) do
+  map("n", key, function() return searching() and "nzz" or key end, { expr = true, desc = "Next match / move" })
+end
+for _, key in ipairs({ "<Up>", "<Left>" }) do
+  map("n", key, function() return searching() and "Nzz" or key end, { expr = true, desc = "Previous match / move" })
+end
+map("n", "<CR>", function()
+  return searching() and "<Cmd>nohlsearch<CR>" or "<CR>"
+end, { expr = true, desc = "Stop at match and clear highlight" })
+
+-- same while still typing the search: Up/Down step through matches live,
+-- Enter jumps to the current one and clears the highlight (Esc cancels)
+local function in_search() return vim.fn.getcmdtype():match("[/?]") ~= nil end
+map("c", "<Down>", function() return in_search() and "<C-g>" or "<Down>" end, { expr = true })
+map("c", "<Up>", function() return in_search() and "<C-t>" or "<Up>" end, { expr = true })
+map("c", "<CR>", function()
+  return in_search() and "<CR><Cmd>nohlsearch<CR>" or "<CR>"
+end, { expr = true })
+
 -- tabs
 map("n", "<leader>nt", ":tabnew<CR>", { desc = "New tab" })
