@@ -17,6 +17,10 @@ return {
         FloatBorder = { bg = "none" },
         Comment = { fg = "#7f807c", italic = true },
         ["@comment"] = { link = "Comment" }, -- treesitter comments use the same style
+        NeoTreeFileStats = { fg = palette.oldWhite }, -- size / type / date values
+        NeoTreeFileStatsHeader = { fg = palette.springViolet1, bold = true }, -- column headers
+        NeoTreeDotfile = { fg = palette.fujiGray }, -- .git etc. (less faded)
+        NeoTreeDimText = { fg = palette.fujiGray },
       }
     end,
   },
