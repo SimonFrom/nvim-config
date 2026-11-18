@@ -1,7 +1,7 @@
 -- Formatters (installed via :Mason)
 --   Lua        -> stylua
 --   Python     -> ruff (organize imports + format)
---   TypeScript -> prettier (needs npm)
+--   TypeScript -> prettierd (daemon, fast), falls back to prettier
 --   C#         -> csharpier
 return {
   {
@@ -22,10 +22,10 @@ return {
       formatters_by_ft = {
         lua = { "stylua" },
         python = { "ruff_organize_imports", "ruff_format" },
-        javascript = { "prettier" },
-        javascriptreact = { "prettier" },
-        typescript = { "prettier" },
-        typescriptreact = { "prettier" },
+        javascript = { "prettierd", "prettier", stop_after_first = true },
+        javascriptreact = { "prettierd", "prettier", stop_after_first = true },
+        typescript = { "prettierd", "prettier", stop_after_first = true },
+        typescriptreact = { "prettierd", "prettier", stop_after_first = true },
         cs = { "csharpier" },
       },
       formatters = {
@@ -33,7 +33,7 @@ return {
         stylua = { prepend_args = { "--indent-type", "Spaces", "--indent-width", "2" } },
       },
       -- Format on save; fall back to the LSP formatter if no tool is available
-      format_on_save = { timeout_ms = 1000, lsp_format = "fallback" },
+      format_on_save = { timeout_ms = 3000, lsp_format = "fallback" },
     },
   },
 }

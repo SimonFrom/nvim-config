@@ -24,7 +24,7 @@ return {
       --
       -- See :h blink-cmp-config-keymap for defining your own keymap
       keymap = {
-        preset = "default",
+        preset = "enter",
         -- Tab: accept Copilot ghost text if visible, else jump in snippet, else insert a tab
         ["<Tab>"] = {
           function()
