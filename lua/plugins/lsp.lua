@@ -25,6 +25,17 @@ return {
   {
     "mason-org/mason-lspconfig.nvim",
     event = { "BufReadPre", "BufNewFile" },
+    -- init runs at startup (before any buffers/diagnostics exist). Calling
+    -- vim.diagnostic.config() later, from a lazy-loaded config, re-renders
+    -- diagnostics for every cached buffer and crashes on ones already wiped.
+    init = function()
+      -- Show diagnostics inline (off by default since Neovim 0.11)
+      vim.diagnostic.config({
+        virtual_text = true,
+        severity_sort = true,
+        float = { border = "rounded", source = true },
+      })
+    end,
     dependencies = {
       "mason-org/mason.nvim",
       "neovim/nvim-lspconfig", -- provides default server configs
@@ -53,13 +64,6 @@ return {
       })
 
       require("mason-lspconfig").setup(opts)
-
-      -- Show diagnostics inline (off by default since Neovim 0.11)
-      vim.diagnostic.config({
-        virtual_text = true,
-        severity_sort = true,
-        float = { border = "rounded", source = true },
-      })
 
       vim.keymap.set("n", "<leader>cd", vim.diagnostic.open_float, { desc = "Line diagnostics" })
       vim.keymap.set("n", "<leader>ca", vim.lsp.buf.code_action, { desc = "Code action" })
