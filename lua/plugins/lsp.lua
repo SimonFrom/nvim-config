@@ -29,9 +29,11 @@ return {
     -- vim.diagnostic.config() later, from a lazy-loaded config, re-renders
     -- diagnostics for every cached buffer and crashes on ones already wiped.
     init = function()
-      -- Show diagnostics inline (off by default since Neovim 0.11)
+      -- Show diagnostics as a virtual line above the affected line
+      require("config.diagnostic_above")
       vim.diagnostic.config({
-        virtual_text = true,
+        virtual_text = false,
+        virtual_lines_above = true,
         severity_sort = true,
         float = { border = "rounded", source = true },
       })
